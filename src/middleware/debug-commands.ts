@@ -160,3 +160,5 @@ debugCommands.command(['permissions', 'chatperms'], async (ctx) => {
 });
 
 
+
+
