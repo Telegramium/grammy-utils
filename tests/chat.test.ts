@@ -68,7 +68,3 @@ describe('getBlockStatus', () => {
         expect(status).toEqual({ isBlocked: false, hasUnblocked: false });
     });
 });
-
-
-
-
