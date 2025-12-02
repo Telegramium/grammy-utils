@@ -1,6 +1,6 @@
 {
     "name": "@telegramium/grammy-utils",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Utility functions for grammY Telegram bots",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -33,6 +33,11 @@
     },
     "devDependencies": {
         "@types/node": "^24.10.1",
+        "@types/sanitize-html": "^2.16.0",
+        "grammy": "^1.38.4",
         "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "sanitize-html": "^2.17.0"
     }
 }
