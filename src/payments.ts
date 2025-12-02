@@ -21,3 +21,4 @@ export function convertStarsToUsd(stars: number): number {
  * convertUsdToStars(0.5) // Returns: 25
  */
 
+
