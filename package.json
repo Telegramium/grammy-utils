@@ -1,0 +1,39 @@
+{
+    "name": "@telegramium/grammy-utils",
+    "version": "0.0.1",
+    "description": "Utility functions for grammY Telegram bots",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build",
+        "test": "echo \"No tests currently implemented\" && exit 0"
+    },
+    "keywords": [
+        "grammy",
+        "telegram",
+        "bot",
+        "utils"
+    ],
+    "author": "",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/telegramium/grammy-utils.git"
+    },
+    "bugs": {
+        "url": "https://github.com/telegramium/grammy-utils/issues"
+    },
+    "homepage": "https://github.com/telegramium/grammy-utils#readme",
+    "publishConfig": {
+        "access": "public"
+    },
+    "type": "commonjs",
+    "devDependencies": {
+        "@types/node": "^24.10.1",
+        "typescript": "^5.9.3"
+    }
+}
