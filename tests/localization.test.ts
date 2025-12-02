@@ -70,6 +70,3 @@ describe('formatCurrency', () => {
         expect(result).toContain('1,234.56');
     });
 });
-
-
-
