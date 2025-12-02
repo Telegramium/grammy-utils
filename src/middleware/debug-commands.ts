@@ -158,3 +158,4 @@ debugCommands.command(['permissions', 'chatperms'], async (ctx) => {
         await ctx.reply('❌ Could not get chat permissions');
     }
 });
+

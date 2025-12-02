@@ -23,3 +23,4 @@ describe('convertStarsToUsd', () => {
         expect(convertStarsToUsd(33)).toBe(0.66);
     });
 });
+
