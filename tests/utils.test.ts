@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { chunk, pick, randomInt, retry, shuffle, sleep, truncate } from '../src/utils';
 import { isValidUrl, textMessageLink } from '../src/url';
+import { chunk, pick, randomInt, retry, shuffle, sleep, truncate } from '../src/utils';
 
 describe('sleep', () => {
     it('should resolve after the specified time', async () => {
