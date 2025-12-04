@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
-import { sleep, pick, randomInt, shuffle, chunk, truncate, isValidUrl, retry } from '../src/utils';
+import { describe, expect, it, vi } from 'vitest';
+import { chunk, pick, randomInt, retry, shuffle, sleep, truncate } from '../src/utils';
+import { isValidUrl, textMessageLink } from '../src/url';
 
 describe('sleep', () => {
     it('should resolve after the specified time', async () => {
@@ -123,6 +124,37 @@ describe('retry', () => {
         const fn = vi.fn().mockRejectedValue(new Error('fail'));
         await expect(retry(fn, 2, 10)).rejects.toThrow('fail');
         expect(fn).toHaveBeenCalledTimes(3);
+    });
+});
+
+describe('textMessageLink', () => {
+    it('should create Telegram URL with text parameter', () => {
+        const result = textMessageLink('durov', 'hello world');
+        expect(result).toBe('https://t.me/durov?text=hello%20world');
+    });
+
+    it('should replace + with %20 in the URL', () => {
+        const result = textMessageLink('durov', 'hello+world');
+        expect(result).toBe('https://t.me/durov?text=hello%2Bworld');
+        // Note: The + in the text itself gets encoded to %2B, but any + in the final URL gets replaced
+        expect(result).not.toContain('+');
+    });
+
+    it('should handle special characters in text', () => {
+        const result = textMessageLink('durov', 'hello & world');
+        expect(result).toContain('https://t.me/durov');
+        expect(result).toContain('text=');
+        expect(result).not.toContain('+');
+    });
+
+    it('should work with different usernames', () => {
+        const result = textMessageLink('testuser', 'test message');
+        expect(result).toBe('https://t.me/testuser?text=test%20message');
+    });
+
+    it('should handle empty text', () => {
+        const result = textMessageLink('durov', '');
+        expect(result).toBe('https://t.me/durov?text=');
     });
 });
 

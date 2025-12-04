@@ -74,20 +74,6 @@ export function truncate(str: string, maxLength: number, suffix: string = '...')
 }
 
 /**
- * Validates if a string is a valid URL
- * @param url The string to validate
- * @returns True if the string is a valid URL
- */
-export function isValidUrl(url: string): boolean {
-    try {
-        new URL(url);
-        return true;
-    } catch {
-        return false;
-    }
-}
-
-/**
  * Retries a function with exponential backoff
  * @template T
  * @param fn The function to retry
