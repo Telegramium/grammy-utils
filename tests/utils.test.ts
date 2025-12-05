@@ -112,9 +112,7 @@ describe('retry', () => {
     });
 
     it('should retry on failure', async () => {
-        const fn = vi.fn()
-            .mockRejectedValueOnce(new Error('fail'))
-            .mockResolvedValue('success');
+        const fn = vi.fn().mockRejectedValueOnce(new Error('fail')).mockResolvedValue('success');
         const result = await retry(fn, 3, 10);
         expect(result).toBe('success');
         expect(fn).toHaveBeenCalledTimes(2);
@@ -157,4 +155,3 @@ describe('textMessageLink', () => {
         expect(result).toBe('https://t.me/durov?text=');
     });
 });
-

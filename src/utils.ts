@@ -81,11 +81,7 @@ export function truncate(str: string, maxLength: number, suffix: string = '...')
  * @param initialDelay Initial delay in milliseconds (default: 1000)
  * @returns The result of the function
  */
-export async function retry<T>(
-    fn: () => Promise<T>,
-    maxRetries: number = 3,
-    initialDelay: number = 1000
-): Promise<T> {
+export async function retry<T>(fn: () => Promise<T>, maxRetries: number = 3, initialDelay: number = 1000): Promise<T> {
     let lastError: Error | undefined;
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -103,4 +99,3 @@ export async function retry<T>(
 
     throw lastError;
 }
-

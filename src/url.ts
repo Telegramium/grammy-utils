@@ -26,4 +26,3 @@ export function textMessageLink(username: string, text: string): string {
     // Replace '+' with '%20' in the URL (bug fix on iOS)
     return url.toString().replace(/\+/g, '%20');
 }
-

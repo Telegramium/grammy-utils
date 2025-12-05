@@ -7,14 +7,7 @@ export const debugCommands = new Composer<Context>();
 
 // Clear keyboard from the screen
 debugCommands.command(
-    [
-        'resetkb',
-        'resetkeyboard',
-        'clearkb',
-        'clearkeyboard',
-        'removekb',
-        'removekeyboard',
-    ],
+    ['resetkb', 'resetkeyboard', 'clearkb', 'clearkeyboard', 'removekb', 'removekeyboard'],
     async (ctx) =>
         ctx.reply('🗑 Keyboard has been removed!', {
             reply_markup: {
@@ -47,9 +40,7 @@ debugCommands.command('myid', async (ctx) => {
 // Chat's id
 debugCommands.command('chatid', async (ctx) => {
     if (ctx.chat.type === 'private') {
-        await ctx.reply(
-            '⚠️ This command only works in groups and channels'
-        );
+        await ctx.reply('⚠️ This command only works in groups and channels');
         return;
     }
     await ctx.reply(`<b>Chat ID:</b> <code>${ctx.chat.id}</code>`, {
@@ -95,12 +86,9 @@ debugCommands.command(['dumpreply', 'replydump']).filter(
         if (file) {
             try {
                 const fileInfo = await ctx.api.getFile(file.file_id);
-                await ctx.reply(
-                    `<b>File info:</b>\n<pre>${JSON.stringify(fileInfo, null, 2)}</pre>`,
-                    {
-                        parse_mode: 'HTML',
-                    }
-                );
+                await ctx.reply(`<b>File info:</b>\n<pre>${JSON.stringify(fileInfo, null, 2)}</pre>`, {
+                    parse_mode: 'HTML',
+                });
             } catch {
                 await ctx.reply(`❌ Could not get file info.`);
             }
@@ -111,9 +99,7 @@ debugCommands.command(['dumpreply', 'replydump']).filter(
 // List all bot commands
 debugCommands.command(['getcommands', 'listcommands'], async (ctx) => {
     const commands = await ctx.api.getMyCommands();
-    const commandList = commands
-        .map((cmd) => `<b>/${cmd.command}</b> — ${cmd.description}`)
-        .join('\n');
+    const commandList = commands.map((cmd) => `<b>/${cmd.command}</b> — ${cmd.description}`).join('\n');
 
     await ctx.reply(`<blockquote>${commandList}</blockquote>`, {
         parse_mode: 'HTML',
@@ -123,9 +109,7 @@ debugCommands.command(['getcommands', 'listcommands'], async (ctx) => {
 // Get chat member count
 debugCommands.command(['membercount', 'chatsize'], async (ctx) => {
     if (ctx.chat.type === 'private') {
-        await ctx.reply(
-            '⚠️ This command only works in groups and channels'
-        );
+        await ctx.reply('⚠️ This command only works in groups and channels');
         return;
     }
     try {
@@ -150,10 +134,9 @@ debugCommands.command(['permissions', 'chatperms'], async (ctx) => {
             await ctx.reply('❌ Could not get chat permissions');
             return;
         }
-        await ctx.reply(
-            `<b>Chat Permissions:</b>\n<pre>${JSON.stringify(chat.permissions, null, 2)}</pre>`,
-            { parse_mode: 'HTML' }
-        );
+        await ctx.reply(`<b>Chat Permissions:</b>\n<pre>${JSON.stringify(chat.permissions, null, 2)}</pre>`, {
+            parse_mode: 'HTML',
+        });
     } catch {
         await ctx.reply('❌ Could not get chat permissions');
     }

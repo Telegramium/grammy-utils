@@ -50,7 +50,10 @@ describe('getBlockStatus', () => {
                 from: { id: 456, is_bot: false, first_name: 'Test' },
                 date: Date.now(),
                 old_chat_member: { status: 'member', user: { id: 1, is_bot: true } },
-                new_chat_member: { status: 'administrator', user: { id: 1, is_bot: true } },
+                new_chat_member: {
+                    status: 'administrator',
+                    user: { id: 1, is_bot: true },
+                },
             },
         });
 

@@ -22,29 +22,28 @@ export function escapeHtml(text: string): string {
 export function sanitizeHtmlTags(text: string): string {
     // Replace <br> and <br/> tags with newlines before sanitizing
     const textWithNewlines = text.replace(/<br\s*\/?>/gi, '\n');
-    
+
     return sanitizeHtml(textWithNewlines, {
         allowedTags: ['b', 'i', 'u', 's', 'tg-spoiler', 'a', 'code', 'pre', 'blockquote'],
         allowedAttributes: {
-            'a': ['href'],
-            'code': ['class'],
-            'blockquote': ['expandable']
+            a: ['href'],
+            code: ['class'],
+            blockquote: ['expandable'],
         },
         allowedSchemes: ['http', 'https', 'mailto', 'tel', 'tg'],
         transformTags: {
-            'strong': 'b',
-            'em': 'i',
-            'ins': 'u',
-            'strike': 's',
-            'del': 's',
-            'a': (tagName, attribs) => {
+            strong: 'b',
+            em: 'i',
+            ins: 'u',
+            strike: 's',
+            del: 's',
+            a: (tagName, attribs) => {
                 // Ensure href is present and valid
                 if (!attribs.href) {
                     return { tagName: 'span', attribs: {} };
                 }
                 return { tagName, attribs };
-            }
-        }
+            },
+        },
     });
 }
-

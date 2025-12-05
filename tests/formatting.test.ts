@@ -3,9 +3,7 @@ import { escapeHtml, sanitizeHtmlTags } from '../src/formatting';
 
 describe('escapeHtml', () => {
     it('should escape HTML characters', () => {
-        expect(escapeHtml('<script>alert("xss")</script>')).toBe(
-            '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
-        );
+        expect(escapeHtml('<script>alert("xss")</script>')).toBe('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;');
     });
 
     it('should escape ampersand', () => {
@@ -69,4 +67,3 @@ describe('sanitizeHtmlTags', () => {
         expect(result).toBe('<b>Bold</b>\n<i>Italic</i>');
     });
 });
-

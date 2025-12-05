@@ -14,17 +14,13 @@ describe('parseCommands', () => {
     it('should handle single command', () => {
         const str = 'start - Start the bot';
         const result = parseCommands(str);
-        expect(result).toEqual([
-            { command: 'start', description: 'Start the bot' },
-        ]);
+        expect(result).toEqual([{ command: 'start', description: 'Start the bot' }]);
     });
 
     it('should handle commands with multiple dashes in description', () => {
         const str = 'test - This is a - test description';
         const result = parseCommands(str);
-        expect(result).toEqual([
-            { command: 'test', description: 'This is a - test description' },
-        ]);
+        expect(result).toEqual([{ command: 'test', description: 'This is a - test description' }]);
     });
 
     it('should skip invalid lines', () => {
@@ -43,8 +39,6 @@ describe('parseCommands', () => {
     it('should trim whitespace', () => {
         const str = '  start  -  Start the bot  ';
         const result = parseCommands(str);
-        expect(result).toEqual([
-            { command: 'start', description: 'Start the bot' },
-        ]);
+        expect(result).toEqual([{ command: 'start', description: 'Start the bot' }]);
     });
 });

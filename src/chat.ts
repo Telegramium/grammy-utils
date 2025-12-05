@@ -15,7 +15,10 @@ import type { Context } from 'grammy';
  *   }
  * })
  */
-export function getBlockStatus(ctx: Context): { isBlocked: boolean; hasUnblocked: boolean } {
+export function getBlockStatus(ctx: Context): {
+    isBlocked: boolean;
+    hasUnblocked: boolean;
+} {
     if (!ctx.myChatMember) {
         return { isBlocked: false, hasUnblocked: false };
     }
@@ -26,15 +29,12 @@ export function getBlockStatus(ctx: Context): { isBlocked: boolean; hasUnblocked
     // This happens when status changes from 'member' to 'kicked' or 'left'
     const isBlocked =
         old_chat_member.status === 'member' &&
-        (new_chat_member.status === 'kicked' ||
-            new_chat_member.status === 'left');
+        (new_chat_member.status === 'kicked' || new_chat_member.status === 'left');
 
     // Check if the user has unblocked or restarted the bot
     const hasUnblocked =
-        (old_chat_member.status === 'kicked' ||
-            old_chat_member.status === 'left') &&
+        (old_chat_member.status === 'kicked' || old_chat_member.status === 'left') &&
         new_chat_member.status === 'member';
 
     return { isBlocked, hasUnblocked };
 }
-

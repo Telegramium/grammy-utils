@@ -45,13 +45,12 @@ export function formatDate(
  * formatRelativeTime(new Date(Date.now() - 3600000), 'en') // Returns: "1 hour ago"
  * formatRelativeTime(new Date(Date.now() + 86400000), 'ru') // Returns: "через 1 день"
  */
-export function formatRelativeTime(
-    date: Date | number | string,
-    locale: string = 'en-US'
-): string {
+export function formatRelativeTime(date: Date | number | string, locale: string = 'en-US'): string {
     const normalizedLocale = locale.replace(/_/g, '-');
     const dateObj = typeof date === 'number' || typeof date === 'string' ? new Date(date) : date;
-    const rtf = new Intl.RelativeTimeFormat(normalizedLocale, { numeric: 'auto' });
+    const rtf = new Intl.RelativeTimeFormat(normalizedLocale, {
+        numeric: 'auto',
+    });
     const now = new Date();
     const diffInSeconds = Math.floor((dateObj.getTime() - now.getTime()) / 1000);
 
@@ -86,11 +85,7 @@ export function formatRelativeTime(
  * formatCurrency(1234.56, 'EUR', 'ru') // Returns: "1 234,56 €"
  * formatCurrency(1234.56, 'RUB', 'ru') // Returns: "1 234,56 ₽"
  */
-export function formatCurrency(
-    amount: number,
-    currency: string = 'USD',
-    locale: string = 'en-US'
-): string {
+export function formatCurrency(amount: number, currency: string = 'USD', locale: string = 'en-US'): string {
     const normalizedLocale = locale.replace(/_/g, '-');
     return new Intl.NumberFormat(normalizedLocale, {
         style: 'currency',
