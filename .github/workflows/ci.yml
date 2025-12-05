@@ -88,3 +88,24 @@ jobs:
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js for Publish
+        if: steps.check_changes.outputs.changed == 'true' && steps.check_tag.outputs.exists == 'false'
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies for Publish
+        if: steps.check_changes.outputs.changed == 'true' && steps.check_tag.outputs.exists == 'false'
+        run: npm ci
+
+      - name: Build for Publish
+        if: steps.check_changes.outputs.changed == 'true' && steps.check_tag.outputs.exists == 'false'
+        run: npm run build
+
+      - name: Publish to NPM
+        if: steps.check_changes.outputs.changed == 'true' && steps.check_tag.outputs.exists == 'false'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
