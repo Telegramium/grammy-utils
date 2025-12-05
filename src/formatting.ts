@@ -20,7 +20,10 @@ export function escapeHtml(text: string): string {
  * @returns The sanitized text
  */
 export function sanitizeHtmlTags(text: string): string {
-    return sanitizeHtml(text, {
+    // Replace <br> and <br/> tags with newlines before sanitizing
+    const textWithNewlines = text.replace(/<br\s*\/?>/gi, '\n');
+    
+    return sanitizeHtml(textWithNewlines, {
         allowedTags: ['b', 'i', 'u', 's', 'tg-spoiler', 'a', 'code', 'pre', 'blockquote'],
         allowedAttributes: {
             'a': ['href'],

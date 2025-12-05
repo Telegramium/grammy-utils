@@ -56,5 +56,17 @@ describe('sanitizeHtmlTags', () => {
         const html = '<a href="tg://user?id=123">mention</a>';
         expect(sanitizeHtmlTags(html)).toContain('tg://user?id=123');
     });
+
+    it('should replace br tags with newlines', () => {
+        const html = 'Line 1<br>Line 2<br/>Line 3<BR />Line 4';
+        const result = sanitizeHtmlTags(html);
+        expect(result).toBe('Line 1\nLine 2\nLine 3\nLine 4');
+    });
+
+    it('should replace br tags with newlines while preserving other tags', () => {
+        const html = '<b>Bold</b><br><i>Italic</i>';
+        const result = sanitizeHtmlTags(html);
+        expect(result).toBe('<b>Bold</b>\n<i>Italic</i>');
+    });
 });
 
