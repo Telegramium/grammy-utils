@@ -47,3 +47,28 @@ export function sanitizeHtmlTags(text: string): string {
         },
     });
 }
+
+/**
+ * Removes all HTML tags from text, returning plain text content
+ * @param text The text to clean
+ * @returns The text with all HTML tags removed
+ */
+export function cleanHtmlTags(text: string): string {
+    // Replace <br> and <br/> tags with newlines before cleaning
+    const textWithNewlines = text.replace(/<br\s*\/?>/gi, '\n');
+
+    // Remove all HTML tags by sanitizing with no allowed tags
+    const cleaned = sanitizeHtml(textWithNewlines, {
+        allowedTags: [],
+        allowedAttributes: {},
+    });
+
+    // Decode HTML entities to get plain text
+    return cleaned
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'")
+        .replace(/&nbsp;/g, ' ');
+}
